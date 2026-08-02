@@ -70,7 +70,7 @@ services:
       - mysql
     restart: unless-stopped
   jenkins:
-    image: jenkins/jenkins:lts-jdk17
+    build: ./jenkins
     container_name: jenkins-container
     user: root
     privileged: true
