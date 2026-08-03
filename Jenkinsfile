@@ -2,28 +2,32 @@ pipeline {
     agent any
 
     stages {
+
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
 
-        stage('Build Docker Images') {
+        stage('Deploy Docker Stack') {
             steps {
-                sh 'docker compose build'
+                sh '''
+                    cd /home/ubuntu/devops-stack
+                    docker compose build
+                    docker compose up -d
+                    docker compose ps
+                '''
             }
         }
+    }
 
-        stage('Deploy Containers') {
-            steps {
-                sh 'docker compose up -d'
-            }
+    post {
+        success {
+            echo 'Deployment completed successfully!'
         }
 
-        stage('Verify Deployment') {
-            steps {
-                sh 'docker compose ps'
-            }
+        failure {
+            echo 'Deployment failed. Check the console output.'
         }
     }
 }
