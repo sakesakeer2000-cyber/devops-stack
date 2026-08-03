@@ -2,32 +2,14 @@ pipeline {
     agent any
 
     stages {
-
-        stage('Checkout') {
+        stage('Test SSH') {
             steps {
-                checkout scm
+                sshagent(credentials: ['ec2-ssh']) {
+                    sh '''
+                        ssh -v -o StrictHostKeyChecking=no ubuntu@172.17.0.1 "echo SUCCESS"
+                    '''
+                }
             }
-        }
-
-        stage('Deploy Docker Stack') {
-            steps {
-                sh '''
-                    cd /home/ubuntu/devops-stack
-                    docker compose build
-                    docker compose up -d
-                    docker compose ps
-                '''
-            }
-        }
-    }
-
-    post {
-        success {
-            echo 'Deployment completed successfully!'
-        }
-
-        failure {
-            echo 'Deployment failed. Check the console output.'
         }
     }
 }
