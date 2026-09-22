@@ -1,57 +1,80 @@
-# DevOps CI/CD and Monitoring Stack
+<div align="center">
 
-A containerized DevOps environment built using Docker, Docker Compose, Jenkins, Prometheus and Grafana on AWS EC2.
+# 🚀 DevOps CI/CD & Monitoring Stack
 
-## 🚀 Project Overview
+### 🐳 Docker • 🔄 Jenkins • 📊 Prometheus • 📈 Grafana • ☁️ AWS EC2
 
-This project demonstrates how multiple DevOps services can be containerized and managed using Docker Compose.
+A containerized DevOps environment demonstrating **CI/CD automation,
+containerization, web servers, database services and monitoring**
+on AWS EC2.
 
-The environment includes web servers, a database, CI/CD automation and monitoring tools.
+<br>
 
-## 🏗️ Architecture
+<img src="https://img.shields.io/badge/AWS-EC2-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white"/>
+<img src="https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white"/>
+<img src="https://img.shields.io/badge/Jenkins-CI%2FCD-D24939?style=for-the-badge&logo=jenkins&logoColor=white"/>
+<img src="https://img.shields.io/badge/Prometheus-Monitoring-E6522C?style=for-the-badge&logo=prometheus&logoColor=white"/>
+<img src="https://img.shields.io/badge/Grafana-Dashboard-F46800?style=for-the-badge&logo=grafana&logoColor=white"/>
 
-The project contains the following services:
+<br><br>
 
-- Apache Web Server
-- Nginx Web Server
-- MySQL Database
-- Jenkins CI/CD
-- Prometheus Monitoring
-- Grafana Dashboard
-- Apache Exporter
+<a href="https://github.com/sakesakeer2000-cyber/devops-stack">
+<img src="https://img.shields.io/badge/⭐%20View%20Repository-181717?style=for-the-badge&logo=github"/>
+</a>
 
-## 🛠️ Technologies Used
+</div>
 
-| Technology | Purpose |
-|---|---|
-| AWS EC2 | Cloud infrastructure |
-| Ubuntu Linux | Operating system |
-| Docker | Containerization |
-| Docker Compose | Multi-container management |
-| Apache | Web server |
-| Nginx | Web server |
-| MySQL | Database |
-| Jenkins | CI/CD automation |
-| Prometheus | Monitoring |
-| Grafana | Monitoring dashboard |
-| Git & GitHub | Version control |
+---
 
-## 📁 Project Structure
+# ⚡ Project at a Glance
 
-```text
-devops-stack/
-│
-├── apache/
-│   └── Dockerfile
-│
-├── nginx/
-│   └── Dockerfile
-│
-├── db/
-│
-├── prometheus/
-│   └── prometheus.yml
-│
-├── Jenkinsfile
-├── docker-compose.yml
-└── .gitignore
+<table>
+<tr>
+<td align="center">☁️<br><b>Cloud</b><br>AWS EC2</td>
+<td align="center">🐳<br><b>Containers</b><br>Docker</td>
+<td align="center">🔄<br><b>CI/CD</b><br>Jenkins</td>
+<td align="center">📊<br><b>Monitoring</b><br>Prometheus</td>
+<td align="center">📈<br><b>Dashboard</b><br>Grafana</td>
+</tr>
+</table>
+
+---
+
+# 🏗️ Architecture
+
+```mermaid
+flowchart TB
+
+    USER["👨‍💻 Developer / User"]
+    GIT["🐙 GitHub"]
+
+    EC2["☁️ AWS EC2<br/>Ubuntu Linux"]
+
+    DOCKER["🐳 Docker Compose"]
+
+    JENKINS["🔄 Jenkins<br/>CI/CD"]
+
+    APACHE["🌐 Apache<br/>:8081"]
+    NGINX["🌐 Nginx<br/>:8082"]
+    MYSQL["🗄️ MySQL<br/>:3306"]
+
+    PROM["📊 Prometheus<br/>:9090"]
+    GRAFANA["📈 Grafana<br/>:3000"]
+
+    EXPORTER["📡 Apache Exporter<br/>:9117"]
+
+    USER --> GIT
+    GIT --> JENKINS
+
+    EC2 --> DOCKER
+    JENKINS --> DOCKER
+
+    DOCKER --> APACHE
+    DOCKER --> NGINX
+    DOCKER --> MYSQL
+    DOCKER --> PROM
+    DOCKER --> GRAFANA
+    DOCKER --> EXPORTER
+
+    EXPORTER --> PROM
+    PROM --> GRAFANA
